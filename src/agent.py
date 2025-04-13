@@ -53,7 +53,7 @@ Analyze the tool's response: if the status is 'error', inform the user politely 
 If the status is 'success', present the weather 'report' clearly and concisely to the user.
 Only use the tool when a city is mentioned for a weather request.
 """
-    tools = await bl_tools(["blaxel-search"]).to_google_adk() + [get_weather]
+    tools = await bl_tools(["blaxel-search"], timeout_enabled=False).to_google_adk() + [get_weather]
     model = await bl_model("sandbox-openai").to_google_adk()
 
     agent = Agent(model=model, name=APP_NAME, description=description, instruction=prompt, tools=tools)
