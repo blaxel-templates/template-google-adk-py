@@ -7,7 +7,7 @@ node_modules
 .cache.yaml
 # C extensions
 *.so
-
+.DS_Store
 # Distribution / packaging
 .Python
 build/
