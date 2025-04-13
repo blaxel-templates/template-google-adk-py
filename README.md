@@ -1,17 +1,17 @@
-# Blaxel Langgraph Agent
+# Blaxel Google ADK Agent
 
 <p align="center">
   <img src="https://blaxel.ai/logo.png" alt="Blaxel"/>
 </p>
 
-A template implementation of a conversational agent using LangGraph and GPT-4. This agent demonstrates the power of LangGraph for building interactive AI agents with tool integration capabilities.
+A template implementation of a conversational agent using Google ADK and GPT-4. This agent demonstrates the power of Google ADK for building interactive AI agents with tool integration capabilities.
 
 ## Features
 
 - Interactive conversational interface
 - Tool integration support (including weather and search capabilities)
 - Streaming responses for real-time interaction
-- Built on LangGraph for efficient agent orchestration
+- Built on Google ADK for efficient agent orchestration
 - Easy deployment and integration with Blaxel platform
 
 ## Prerequisites
@@ -32,8 +32,8 @@ A template implementation of a conversational agent using LangGraph and GPT-4. T
 **Clone the repository and install dependencies:**
 
 ```bash
-git clone https://github.com/beamlit/template-langgraph-py.git
-cd template-langgraph-py
+git clone https://github.com/beamlit/template-google-adk-py.git
+cd template-google-adk-py
 uv sync
 ```
 
@@ -74,7 +74,7 @@ This command uses your code and the configuration files under the `.blaxel` dire
 ## Project Structure
 
 - **src/main.py** - Application entry point
-- **src/agent.py** - Core agent implementation with LangGraph integration
+- **src/agent.py** - Core agent implementation with Google ADK integration
 - **src/server/** - Server implementation and routing
 - **pyproject.toml** - UV package manager configuration
 - **blaxel.toml** - Blaxel deployment configuration

@@ -1,18 +1,18 @@
-from ..agent import agent
 from blaxel.instrumentation.span import SpanManager
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
+
+from ..agent import agent
 
 router = APIRouter()
 
-class RequestInput(BaseModel):
-    inputs: str
-
 @router.post("/")
-async def handle_request(request: RequestInput):
-    with SpanManager("blaxel-langgraph").create_active_span("agent-request", {}):
+async def handle_request(request: Request):
+    user_id = request.headers.get("X-User-Id", "user_1")
+    session_id = request.headers.get("X-Session-Id", "session_001")
+    body = await request.json()
+    with SpanManager("blaxel-google-adk").create_active_span("agent-request", {"user_id": user_id, "session_id": session_id}):
         return StreamingResponse(
-            agent(request.inputs),
+            agent(body["inputs"], user_id, session_id),
             media_type='text/event-stream'
         )
