@@ -36,6 +36,10 @@ git clone https://github.com/beamlit/template-google-adk-py.git
 cd template-google-adk-py
 uv sync
 ```
+**Apply Blaxel manifests:**
+```bash
+bl apply -f .blaxel
+```
 
 ## Running the Server Locally
 

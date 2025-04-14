@@ -1,0 +1,18 @@
+apiVersion: blaxel.ai/v1alpha1
+kind: IntegrationConnection
+metadata:
+  name: google-maps-integration
+spec:
+  integration: google-maps
+  secret:
+    googleMapsApiKey: ${secrets.GOOGLE_MAPS_API_KEY}
+---
+apiVersion: blaxel.ai/v1alpha1
+kind: Function
+metadata:
+  name: google-maps
+spec:
+  integrationConnections:
+    - google-maps-integration
+  runtime:
+    type: mcp

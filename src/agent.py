@@ -9,6 +9,7 @@ from google.adk.sessions import InMemorySessionService
 from google.genai import types
 
 logger = getLogger(__name__)
+session_service = InMemorySessionService()
 
 # @title Define the get_weather Tool
 def weather(city: str) -> str:
@@ -27,24 +28,20 @@ APP_NAME = "research_assistant"
 async def agent(input: str, user_id: str, session_id: str) -> AsyncGenerator[str, None]:
     description = "You are a helpful assistant that can answer questions and help with tasks."
     prompt = """
-You are a helpful weather assistant. Your primary goal is to provide current weather reports. "
-When the user asks for the weather in a specific city,
-You can also use a research tool to find more information about anything.
-Analyze the tool's response: if the status is 'error', inform the user politely about the error message.
-If the status is 'success', present the weather 'report' clearly and concisely to the user.
-Only use the tool when a city is mentioned for a weather request.
+You are a helpful assistant that can answer questions about weather, places and more generic questions about real time information.
 """
-    tools = await bl_tools(["blaxel-search"], timeout_enabled=False).to_google_adk() + [weather]
-    model = await bl_model("sandbox-openai").to_google_adk()
+    tools = await bl_tools(["blaxel-search", "google-maps"], timeout_enabled=False).to_google_adk() + [weather]
+    model = await bl_model("gemini-2-0-flash").to_google_adk()
 
     agent = Agent(model=model, name=APP_NAME, description=description, instruction=prompt, tools=tools)
+
     # Create the specific session where the conversation will happen
-    session_service = InMemorySessionService()
-    session_service.create_session(
-        app_name=APP_NAME,
-        user_id=user_id,
-        session_id=session_id
-    )
+    if not session_service.get_session(app_name=APP_NAME, user_id=user_id, session_id=session_id):
+        session_service.create_session(
+            app_name=APP_NAME,
+            user_id=user_id,
+            session_id=session_id
+        )
     logger.info(f"Session created: App='{APP_NAME}', User='{user_id}', Session='{session_id}'")
 
     runner = Runner(
