@@ -1,3 +1,5 @@
+import uuid
+
 from blaxel.instrumentation.span import SpanManager
 from fastapi import APIRouter, Request
 from fastapi.responses import StreamingResponse
@@ -8,8 +10,8 @@ router = APIRouter()
 
 @router.post("/")
 async def handle_request(request: Request):
-    user_id = request.headers.get("X-User-Id", "user_1")
-    session_id = request.headers.get("X-Session-Id", "session_001")
+    user_id = request.headers.get("X-User-Id", str(uuid.uuid4()))
+    session_id = request.headers.get("X-Session-Id", str(uuid.uuid4()))
     body = await request.json()
     with SpanManager("blaxel-google-adk").create_active_span("agent-request", {"user_id": user_id, "session_id": session_id}):
         return StreamingResponse(

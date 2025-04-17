@@ -1,7 +1,7 @@
 type = "agent"
 
 functions = ["all"]
-models = ["sandbox-openai"]
+models = ["gemini-2-0-flash"]
 
 [entrypoint]
 prod = ".venv/bin/python3 -m src"
