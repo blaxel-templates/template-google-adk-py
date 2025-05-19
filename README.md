@@ -36,6 +36,14 @@ git clone https://github.com/beamlit/template-google-adk-py.git
 cd template-google-adk-py
 uv sync
 ```
+
+Set a GEMINI_API_KEY environment variable in a .env file:
+
+```bash
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+
 **Apply Blaxel manifests:**
 ```bash
 bl apply -f .blaxel
@@ -62,7 +70,7 @@ bl chat --local blaxel-agent
 Or run it directly with specific input:
 
 ```bash
-bl run agent blaxel-agent --local --data '{"input": "What is the weather in Paris?"}'
+bl run agent blaxel-agent --local --data '{"inputs": "What is the weather in Paris?"}'
 ```
 
 ## Deploying to Blaxel
