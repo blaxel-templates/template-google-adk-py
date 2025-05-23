@@ -37,7 +37,7 @@ async def agent(input: str, user_id: str, session_id: str) -> AsyncGenerator[str
 You are a helpful assistant that can answer questions about weather, places and more generic questions about real time information.
 """
     tools = await bl_tools(["blaxel-search"], timeout_enabled=False).to_google_adk() + [weather]
-    model = await bl_model("gemini-2-5-pro-preview-03-25").to_google_adk()
+    model = await bl_model("gemini-2-0-flash").to_google_adk()
 
     agent = Agent(model=model, name=APP_NAME, description=description, instruction=prompt, tools=tools)
 
