@@ -20,7 +20,7 @@ A template implementation of a conversational agent using Google ADK and GPT-4. 
 - **[UV](https://github.com/astral-sh/uv):** An extremely fast Python package and project manager, written in Rust
 - **[Blaxel CLI](https://docs.blaxel.ai/Get-started):** Ensure you have the Blaxel CLI installed. If not, install it globally:
   ```bash
-  curl -fsSL https://raw.githubusercontent.com/beamlit/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
+  curl -fsSL https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
   ```
 - **Blaxel login:** Login to Blaxel platform
   ```bash
@@ -32,7 +32,7 @@ A template implementation of a conversational agent using Google ADK and GPT-4. 
 **Clone the repository and install dependencies:**
 
 ```bash
-git clone https://github.com/beamlit/template-google-adk-py.git
+git clone https://github.com/blaxel-ai/template-google-adk-py.git
 cd template-google-adk-py
 uv sync
 ```
