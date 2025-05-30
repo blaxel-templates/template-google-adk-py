@@ -1,5 +1,4 @@
 import os
-
 from logging import getLogger
 from typing import AsyncGenerator
 
@@ -9,13 +8,9 @@ from google.adk.agents import Agent
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
+
 logger = getLogger(__name__)
 session_service = InMemorySessionService()
-
-
-if not os.getenv("GEMINI_API_KEY"):
-    # This hack need to be done with latest version of google-adk
-    os.environ["GEMINI_API_KEY"] = "dummy-key"
 
 # @title Define the get_weather Tool
 def weather(city: str) -> str:
@@ -36,18 +31,20 @@ async def agent(input: str, user_id: str, session_id: str) -> AsyncGenerator[str
     prompt = """
 You are a helpful assistant that can answer questions about weather, places and more generic questions about real time information.
 """
-    tools = await bl_tools(["blaxel-search","google-maps"], timeout_enabled=False).to_google_adk() + [weather]
-    model = await bl_model("gemini-2-0-flash").to_google_adk()
+    tools = await bl_tools(["blaxel-search"], timeout_enabled=False).to_google_adk() + [weather]
+    model = await bl_model("sandbox-openai").to_google_adk()
 
     agent = Agent(model=model, name=APP_NAME, description=description, instruction=prompt, tools=tools)
 
     # Create the specific session where the conversation will happen
-    if not session_service.get_session(app_name=APP_NAME, user_id=user_id, session_id=session_id):
-        session_service.create_session(
+    session = await session_service.get_session(app_name=APP_NAME, user_id=user_id, session_id=session_id)
+    if not session:
+        session = await session_service.create_session(
             app_name=APP_NAME,
             user_id=user_id,
             session_id=session_id
         )
+
     logger.info(f"Session created: App='{APP_NAME}', User='{user_id}', Session='{session_id}'")
 
     runner = Runner(
