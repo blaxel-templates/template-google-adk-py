@@ -1,10 +1,31 @@
 # Blaxel Google ADK Agent
 
-<p align="center">
-  <img src="https://blaxel.ai/logo.png" alt="Blaxel"/>
-</p>
+<div align="center">
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/release/python-3100/)
+[![UV](https://img.shields.io/badge/UV-synced-green.svg)](https://github.com/astra-sh/uv)
+[![Blaxel CLI](https://img.shields.io/badge/Blaxel_CLI-installed-green.svg)](https://docs.blaxel.ai/Get-started)
+
+</div>
 
 A template implementation of a conversational agent using Google ADK and GPT-4. This agent demonstrates the power of Google ADK for building interactive AI agents with tool integration capabilities.
+
+## Table of Contents
+
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Running Locally](#running-locally)
+  - [Testing Your Agent](#testing-your-agent)
+- [Deployment](#deployment)
+- [API Reference](#api-reference)
+- [Project Structure](#project-structure)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Support](#support)
+- [License](#license)
 
 ## Features
 
@@ -14,35 +35,49 @@ A template implementation of a conversational agent using Google ADK and GPT-4. 
 - Built on Google ADK for efficient agent orchestration
 - Easy deployment and integration with Blaxel platform
 
-## Prerequisites
+## Quick Start
 
-- **Python:** 3.10 or later
-- **[UV](https://github.com/astral-sh/uv):** An extremely fast Python package and project manager, written in Rust
-- **[Blaxel CLI](https://docs.blaxel.ai/Get-started):** Ensure you have the Blaxel CLI installed. If not, install it globally:
-  ```bash
-  curl -fsSL https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
-  ```
-- **Blaxel login:** Login to Blaxel platform
-  ```bash
-  bl login YOUR-WORKSPACE
-  ```
-
-## Installation
-
-**Clone the repository and install dependencies:**
+### Clone the repository
 
 ```bash
 git clone https://github.com/blaxel-ai/template-google-adk-py.git
+```
+
+### Navigate to project directory
+
+```bash
 cd template-google-adk-py
+```
+
+## Installation
+
+### Prerequisites
+
+- Python 3.10 or later
+- [UV](https://github.com/astra-sh/uv): Fast Python package manager
+- [Blaxel CLI](https://docs.blaxel.ai/Get-started)
+
+### Install dependencies
+
+```bash
 uv sync
 ```
 
-**Apply Blaxel manifests:**
+### Apply Blaxel manifests
+
 ```bash
 bl apply -f .blaxel
 ```
 
-## Running the Server Locally
+### Blaxel login
+
+```bash
+bl login YOUR-WORKSPACE
+```
+
+## Usage
+
+### Running Locally
 
 Start the development server with hot reloading:
 
@@ -50,40 +85,76 @@ Start the development server with hot reloading:
 bl serve --hotreload
 ```
 
-_Note:_ This command starts the server and enables hot reload so that changes to the source code are automatically reflected.
+### Testing Your Agent
 
-## Testing your agent
-
-You can test your agent using the chat interface:
+Using chat interface:
 
 ```bash
 bl chat --local blaxel-agent
 ```
 
-Or run it directly with specific input:
+With specific input:
 
 ```bash
 bl run agent blaxel-agent --local --data '{"inputs": "What is the weather in Paris?"}'
 ```
 
-## Deploying to Blaxel
+## Deployment
 
-When you are ready to deploy your application:
+Deploy your application:
 
 ```bash
 bl deploy
 ```
 
-This command uses your code and the configuration files under the `.blaxel` directory to deploy your application.
+## API Reference
+
+```bash
+POST /agents/{agent_id}/run
+GET /agents/{agent_id}/info
+GET /health
+```
 
 ## Project Structure
 
-- **src/main.py** - Application entry point
-- **src/agent.py** - Core agent implementation with Google ADK integration
-- **src/server/** - Server implementation and routing
-- **pyproject.toml** - UV package manager configuration
-- **blaxel.toml** - Blaxel deployment configuration
+- `src/main.py` - Application entry point
+- `src/agent.py` - Core agent implementation with Google ADK integration
+- `src/server/` - Server implementation and routing
+- `pyproject.toml` - UV package manager configuration
+- `blaxel.toml` - Blaxel deployment configuration
+
+## Troubleshooting
+
+- Ensure Python 3.10+ is installed
+- Verify network connectivity and API keys
+- Check Blaxel CLI installation
+- Re-run `uv sync` to update dependencies
+
+## Contributing
+
+Contributions are welcome! To get started:
+
+1. Fork the repository
+2. Create a feature branch:
+   ```bash
+   git checkout -b my-feature
+   ```
+3. Commit your changes:
+   ```bash
+   git add .
+   git commit -m 'Add my feature'
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin my-feature
+   ```
+5. Submit a pull request
+
+## Support
+
+- Report bugs and feature requests on [GitHub Issues](https://github.com/blaxel-ai/template-google-adk-py/issues)
+- Reach out on [Blaxel Discord](https://discord.gg/GsNzqUPcHP)
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
