@@ -36,7 +36,6 @@ You are a helpful assistant that can answer questions about weather, places and 
 """
     tools = await bl_tools(["blaxel-search"], timeout_enabled=False) + [weather]
     model = await bl_model("sandbox-openai")
-
     agent = Agent(
         model=model,
         name=APP_NAME,
