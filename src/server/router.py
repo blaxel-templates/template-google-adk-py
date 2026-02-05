@@ -17,6 +17,13 @@ async def handle_request(request: Request):
     with SpanManager("blaxel-google-adk").create_active_span(
         "agent-request", {"user_id": user_id, "session_id": session_id}
     ):
+        # Headers to disable proxy/CDN buffering (CloudFront, nginx, etc.)
         return StreamingResponse(
-            agent(body["inputs"], user_id, session_id), media_type="text/event-stream"
+            agent(body["inputs"], user_id, session_id),
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache, no-transform",
+                "X-Accel-Buffering": "no",
+                "Connection": "keep-alive",
+            },
         )
