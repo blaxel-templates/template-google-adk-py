@@ -26,4 +26,4 @@ select = ["E", "F"]
 
 [tool.uv]
 # blaxel 0.2.x predates mcp 2; google-adk 1.38 is the first 1.x that allows the patched starlette
-constraint-dependencies = ["mcp<2", "google-adk>=1.38,<2"]
+constraint-dependencies = ["fsspec>=2026.6.0", "mcp<2", "google-adk>=1.38,<2"]
