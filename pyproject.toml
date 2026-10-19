@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "asgi-correlation-id>=4.3.4",
-    "blaxel[googleadk,telemetry]==0.2.58",
+    "blaxel[googleadk,telemetry]==0.4.18",
     "fastapi[standard]>=0.115.12",
     "rich>=13.9.4",
 ]
@@ -25,5 +25,4 @@ skip-magic-trailing-comma = false
 select = ["E", "F"]
 
 [tool.uv]
-# blaxel 0.2.x predates mcp 2; google-adk 1.38 is the first 1.x that allows the patched starlette
-constraint-dependencies = ["fsspec>=2026.6.0", "mcp<2", "google-adk>=1.38,<2"]
+constraint-dependencies = ["fsspec>=2026.6.0"]
